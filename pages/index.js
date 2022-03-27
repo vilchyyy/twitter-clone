@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react'
 import Header from "../components/Header"
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://backend33423.herokuapp.com/tweets`)
+  const res = await fetch(`https://backend323423.herokuapp.com/tweets`)
   const data = await res.json()
   return { props: { data } }
 }
