@@ -18,7 +18,6 @@ export default function Home({data}) {
       router.replace(router.asPath)
   }
   const fdata = data
-  fdata.reverse()
   const { data: session, status } = useSession()
   const loading = status === "loading"
   console.log(session)
