@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react'
 import Header from "../components/Header"
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://backend323423.herokuapp.com/tweets`)
+  const res = await fetch(`https://backend-342981244121234.herokuapp.com/tweets`)
   const data = await res.json()
   return { props: { data } }
 }
@@ -17,7 +17,8 @@ export default function Home({data}) {
   const refreshData = () => {
       router.replace(router.asPath)
   }
-
+  const fdata = data
+  fdata.reverse()
   const { data: session, status } = useSession()
   const loading = status === "loading"
   console.log(session)
@@ -31,18 +32,18 @@ export default function Home({data}) {
       refresher = {refreshData}
       />
       {
-        data.map((tweet) => {
-          
+       
+        fdata.map((tweet) => {
           return <Tweet
-            id={tweet.id}
-            key={tweet.id}
-            image={tweet.image}
-            accName={tweet.accName}
-            atName={tweet.atName}
-            text={tweet.text}
-            likes={tweet.likes}
-            comments={tweet.comments}
-            shares={tweet.shares}
+            id={tweet._id}
+            key={tweet._id}
+            image={tweet.Image}
+            accName={tweet.AccName}
+            atName={tweet.AtName}
+            text={tweet.Text}
+            likes={tweet.Likes}
+            comments={tweet.Comments}
+            shares={tweet.Shares}
           />
         })
       }

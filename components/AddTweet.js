@@ -17,17 +17,15 @@ export default function AddTweet(props) {
     const { data: session, status } = useSession()
     const loading = status === "loading"
     const handleClick = () => { 
-        const a = nanoid()
         if (session) {
-            axios.post("https://backend323423.herokuapp.com/tweets",{
-            id: a,
-            image: session.user.image,
-            accName: session.user.name,
-            atName: session.user.name,
-            text: tweetData,
-            likes: [],
+            axios.post("https://backend-342981244121234.herokuapp.com/tweets",{
+            Image: session.user.image,
+            AccName: session.user.name,
+            AtName: session.user.name,
+            Text: tweetData,
+            Likes: [],
             Comments: [],
-            shares: 0,
+            Shares: 0,
         }).then(()=> props.refresher())
         setTweetData("")
         } else {

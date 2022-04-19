@@ -20,14 +20,13 @@ export default function AddComment(props) {
     const handleClick = () => { 
         const a = nanoid()
         if (session) {
-            axios.put("https://backend323423.herokuapp.com/tweets",{
-                tid: id,
-                id: a,
-                image: session.user.image,
-                accName: session.user.name,
-                atName: session.user.name,
-                text: commentData,
-                likes: [],
+            axios.post("https://backend-342981244121234.herokuapp.com/tweets/"+ id,{
+                TID: id,
+                Image: session.user.image,
+                AccName: session.user.name,
+                AtName: session.user.name,
+                Text: commentData,
+                Likes: [],
             }).then(()=>props.refresher())
             setCommentData("")
         } else {

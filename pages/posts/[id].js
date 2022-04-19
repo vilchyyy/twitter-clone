@@ -5,8 +5,9 @@ import AddComment from "../../components/AddComment"
 import shrek from "../../public/shrek.jpg"
 import Header from "../../components/Header"
 
-export async function getServerSideProps() {
-    const res = await fetch(`https://backend323423.herokuapp.com/tweets`)
+export async function getServerSideProps(ctx) {
+    const { id } = ctx.query
+    const res = await fetch(`https://backend-342981244121234.herokuapp.com/tweets/${id}`)
     const data = await res.json()
     return { props: { data } }
   }
@@ -18,7 +19,7 @@ export default function Post({data}) {
     }
     const { id } = router.query
     let tweet
-    tweet = data.find(x => x.id == id)
+    tweet = data
     return (
     <>
     <GlobalStyle/>
@@ -28,33 +29,31 @@ export default function Post({data}) {
         { tweet ?       
         <>
         <Tweet
-            id={tweet.id}
-            key={tweet.id}
-            image={tweet.image}
-            accName={tweet.accName}
-            atName={tweet.atName}
-            text={tweet.text}
-            likes={tweet.likes}
-            comments={tweet.comments}
-            shares={tweet.shares}
-            liked={tweet.liked}
+            id={tweet._id}
+            key={tweet._id}
+            image={tweet.Image}
+            accName={tweet.AccName}
+            atName={tweet.AtName}
+            text={tweet.Text}
+            likes={tweet.Likes}
+            comments={tweet.Comments}
+            shares={tweet.Shares}
         />
         <AddComment
             refresher={refreshData}
         />
         {tweet.Comments.map(comment => {
             return <Tweet
-                id={comment.id}
-                tid={tweet.id}
-                key={comment.id}
-                image={comment.image}
-                accName={comment.accName}
-                atName={comment.atName}
-                text={comment.text}
-                likes={comment.likes}
-                comments={comment.comments}
-                shares={comment.shares}
-                liked={comment.liked}
+                id={comment._id}
+                tid={tweet._id}
+                key={comment._id}
+                image={comment.Image}
+                accName={comment.AccName}
+                atName={comment.AtName}
+                text={comment.Text}
+                likes={comment.Likes}
+                comments={comment.Comments}
+                shares={comment.Shares}
         />
         })}
         </>

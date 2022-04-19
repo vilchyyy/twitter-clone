@@ -15,22 +15,20 @@ export default function Tweet(props){
     const handleClick = (e) => {
         if (session) {
             if (props.tid) {
-                axios.put("https://backend323423.herokuapp.com/tweets/comments/like", {
-                    tid: props.tid,
-                    id: props.id,
-                    accName: session.user.name
+                axios.put(`https://backend-342981244121234.herokuapp.com/tweets/${props.tid}/${props.id}`, {
+                    AccName: session.user.name
                 }).then(res => {
                     console.log(res)
-                    setLikes(res.data.likes)
+                    setLikes(res.data.Likes)
                 })
                 e.stopPropagation()
             } else {
-                axios.put("https://backend323423.herokuapp.com/tweets/like", {
-                    tid: props.id,
-                    accName: session.user.name
+                axios.put(`https://backend-342981244121234.herokuapp.com/tweets/${props.id}`, {
+                    AccName: session.user.name
                 })
             .then(res => {
-                setLikes(res.data.likes)
+                console.log(res)
+                setLikes(res.data.Likes)
             })
                 e.stopPropagation()
             }   
